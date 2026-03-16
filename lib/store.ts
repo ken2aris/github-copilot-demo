@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import diaryReducer, { type Diary, hydrateDiaries } from "@/features/diary/diarySlice";
+import diaryReducer, { type Diary } from "@/features/diary/diarySlice";
 
 const STORAGE_KEY = "diary-app-state";
 
@@ -25,6 +25,10 @@ function loadState(): PersistedState | undefined {
   }
 }
 
+export function loadPersistedDiaryState() {
+  return loadState()?.diary;
+}
+
 export const store = configureStore({
   reducer: {
     diary: diaryReducer
@@ -32,11 +36,6 @@ export const store = configureStore({
 });
 
 if (typeof window !== "undefined") {
-  const persisted = loadState();
-  if (persisted?.diary) {
-    store.dispatch(hydrateDiaries(persisted.diary));
-  }
-
   store.subscribe(() => {
     const state = store.getState();
     const data: PersistedState = {

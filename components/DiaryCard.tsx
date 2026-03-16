@@ -33,8 +33,15 @@ export function DiaryCard({ diary }: DiaryCardProps) {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
   const imageUrl = useMemo(() => {
-    const sig = Array.from(diary.id).reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    return `https://source.unsplash.com/900x600/?journal,notebook,writing&sig=${sig}`;
+    const imagePool = [
+      "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1474932430478-367dbb6832c1?auto=format&fit=crop&w=1200&q=80"
+    ];
+    const index = Array.from(diary.id).reduce((acc, char) => acc + char.charCodeAt(0), 0) % imagePool.length;
+    return imagePool[index];
   }, [diary.id]);
 
   return (
