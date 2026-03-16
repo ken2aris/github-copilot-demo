@@ -13,7 +13,7 @@ export default function HomePage() {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
 
   return (
-    <main className="mx-auto min-h-screen w-full max-w-7xl px-4 pb-24 pt-10 sm:px-6 lg:px-8">
+    <div className="mx-auto w-full max-w-7xl px-4 pb-24 pt-10 sm:px-6 lg:px-8">
       <header className="mb-8">
         <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">My Diary</h1>
         <p className="mt-2 text-sm text-muted-foreground sm:text-base">
@@ -30,6 +30,6 @@ export default function HomePage() {
         onOpenChange={setIsCreateOpen}
         onSubmit={(value) => dispatch(addDiary(value))}
       />
-    </main>
+    </div>
   );
 }
